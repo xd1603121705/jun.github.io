@@ -95,21 +95,21 @@
 
 
 
-<meta name="description" content="引言面试中被问到了同步异步、并发并行的概念，发现自己没法清晰地表达出它们的区别，因此通过别人的博客结合相关书籍重新学习了一下这几个概念。 一，阻塞与非阻塞首先，阻塞这个概念来源于操作系统中进程/线程的状态模型中，进程因创建而存在，因撤销而消亡，在它的生命周期中，由于内因和外因的影响会呈现不同的状态，如下图：一般地，进程">
+<meta name="description" content="引言面试中被问到了同步异步、并发并行的概念，发现自己没法清晰地表达出它们的区别，因此通过别人的博客结合相关书籍重新学习了一下这几个概念。 一，阻塞与非阻塞首先，阻塞这个概念来源于操作系统中进程/线程的状态模型中，进程因创建而存在，因撤销而消亡，在它的生命周期中，由于内因和外因的影响会呈现不同的状态，如下图：">
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="阻塞&#x2F;非阻塞、同步&#x2F;异步和并行&#x2F;并发的分析与理解">
 <meta property="og:url" content="http://yoursite.com/2018/04/11/test/index.html">
 <meta property="og:site_name" content="jun-home">
-<meta property="og:description" content="引言面试中被问到了同步异步、并发并行的概念，发现自己没法清晰地表达出它们的区别，因此通过别人的博客结合相关书籍重新学习了一下这几个概念。 一，阻塞与非阻塞首先，阻塞这个概念来源于操作系统中进程/线程的状态模型中，进程因创建而存在，因撤销而消亡，在它的生命周期中，由于内因和外因的影响会呈现不同的状态，如下图：一般地，进程具有三种基本状态：运行态、就绪态和阻塞态。  运行态(Running)：进程已获">
+<meta property="og:description" content="引言面试中被问到了同步异步、并发并行的概念，发现自己没法清晰地表达出它们的区别，因此通过别人的博客结合相关书籍重新学习了一下这几个概念。 一，阻塞与非阻塞首先，阻塞这个概念来源于操作系统中进程/线程的状态模型中，进程因创建而存在，因撤销而消亡，在它的生命周期中，由于内因和外因的影响会呈现不同的状态，如下图：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/Au7flqA.jpg">
 <meta property="og:image" content="https://i.imgur.com/QSGB5rK.jpg">
 <meta property="og:image" content="https://i.imgur.com/Utw6HNO.jpg">
-<meta property="og:updated_time" content="2018-04-11T09:40:03.615Z">
+<meta property="og:updated_time" content="2018-04-11T13:57:01.531Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="阻塞&#x2F;非阻塞、同步&#x2F;异步和并行&#x2F;并发的分析与理解">
-<meta name="twitter:description" content="引言面试中被问到了同步异步、并发并行的概念，发现自己没法清晰地表达出它们的区别，因此通过别人的博客结合相关书籍重新学习了一下这几个概念。 一，阻塞与非阻塞首先，阻塞这个概念来源于操作系统中进程/线程的状态模型中，进程因创建而存在，因撤销而消亡，在它的生命周期中，由于内因和外因的影响会呈现不同的状态，如下图：一般地，进程具有三种基本状态：运行态、就绪态和阻塞态。  运行态(Running)：进程已获">
+<meta name="twitter:description" content="引言面试中被问到了同步异步、并发并行的概念，发现自己没法清晰地表达出它们的区别，因此通过别人的博客结合相关书籍重新学习了一下这几个概念。 一，阻塞与非阻塞首先，阻塞这个概念来源于操作系统中进程/线程的状态模型中，进程因创建而存在，因撤销而消亡，在它的生命周期中，由于内因和外因的影响会呈现不同的状态，如下图：">
 <meta name="twitter:image" content="https://i.imgur.com/Au7flqA.jpg">
 
 
@@ -401,7 +401,7 @@
 
       
         <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>面试中被问到了同步异步、并发并行的概念，发现自己没法清晰地表达出它们的区别，因此通过别人的博客结合相关书籍重新学习了一下这几个概念。</p>
-<h1 id="一，阻塞与非阻塞"><a href="#一，阻塞与非阻塞" class="headerlink" title="一，阻塞与非阻塞"></a>一，阻塞与非阻塞</h1><p>首先，阻塞这个概念来源于操作系统中进程/线程的状态模型中，进程因创建而存在，因撤销而消亡，在它的生命周期中，由于内因和外因的影响会呈现不同的状态，如下图：<br><img src="https://i.imgur.com/Au7flqA.jpg" alt=""><br>一般地，进程具有三种基本状态：运行态、就绪态和阻塞态。</p>
+<h1 id="一，阻塞与非阻塞"><a href="#一，阻塞与非阻塞" class="headerlink" title="一，阻塞与非阻塞"></a>一，阻塞与非阻塞</h1><p>首先，阻塞这个概念来源于操作系统中进程/线程的状态模型中，进程因创建而存在，因撤销而消亡，在它的生命周期中，由于内因和外因的影响会呈现不同的状态，如下图：<br><img src="https://i.imgur.com/Au7flqA.jpg" alt=""><br><a id="more"></a><br>一般地，进程具有三种基本状态：运行态、就绪态和阻塞态。</p>
 <ul>
 <li>运行态(Running)：进程已获得必要的资源，并占有处理机，处理机正在执行该进程的程序。</li>
 <li>就绪态(Ready)：进程等待系统为其分配CPU，而CPU被其他进程占用，所以暂时不能运行，但此时进程已具备了执行的所有条件。</li>
